@@ -1,0 +1,61 @@
+:root {
+    color-scheme: light dark;
+    /* Backgrounds */
+    --bg-light: radial-gradient(ellipse at top, hsl(332, 100%, 95%), hsl(292, 100%, 95%) 50%, hsl(297, 100%, 93%) 100%);
+    --bg-dark: radial-gradient(ellipse at top, hsl(292, 100%, 6%), hsl(291, 100%, 10%) 60%, hsl(282, 100%, 5%) 100%);
+    --bg-base: #242424;
+    --color-bg-light: #ffffff;
+    --color-dark-bg: #383838;
+
+    /* Cards */
+    --card-light: linear-gradient(160deg, hsl(324, 100%, 97%), hsl(308, 100%, 95%));
+    --card-dark: linear-gradient(160deg, hsl(300, 100%, 12%), hsl(295, 100%, 9%));
+
+    /* Text */
+    --text-light: hsl(299, 51%, 46%);
+    --text-dark: hsl(318, 100%, 92%);
+    --color-text: hsl(313, 100%, 32%);
+    --color-dark-text: hsl(318, 100%, 92%);
+
+    /* Borders */
+    --border-light: hsl(318, 100%, 92%);
+    --border-dark: hsl(300, 100%, 33%);
+    --border-light-counter: hsl(289, 100%, 10%);
+    --border-dark-counter: hsl(0, 0%, 100%);
+    --border-dark-gray: hsla(0, 0%, 100%, 0.302);
+    --color-border-light: hsl(0, 0%, 80%);
+    --color-dark-border: hsl(0, 0%, 85%);
+    --color-hover-border: hsl(0, 0%, 53%);
+    --color-border-none: none;
+
+    /* Shadows */
+    --shadow-light: hsla(300, 100%, 87%, 0.4);
+    --shadow-dark: hsla(279, 100%, 70%, 0.3);
+    --color-shadow: hsla(309, 100%, 81%, 0.4);
+    --color-shadow-hover: hsla(309, 100%, 81%, 0.6);
+    --color-hover-shadow: hsla(0, 0%, 0%, 0.185);
+    --color-dark-shadow: hsla(0, 0%, 0%, 0.15);
+    --color-dark-hover-shadow: hsla(0, 0%, 100%, 0.433);
+    --color-dark-box-shadow: hsla(300, 100%, 74%, 0.3);
+    --color-shadow-white: hsla(0, 0%, 100%, 0.742);
+
+    /* Gradients */
+    --color-gradient-start: hsl(312, 100%, 90%);
+    --color-gradient-end: hsl(315, 100%, 88%);
+    --color-dark-gradient-start: #3e004e;
+    --color-dark-gradient-end: #280031;
+
+    /* Hover Effects */
+    --color-hover-bg-light: hsl(0, 100%, 98%);
+    --color-hover-bg-dark: hsl(0, 0%, 28%);
+
+
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    background-color: var(--bg-colour);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
