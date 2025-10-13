@@ -1,9 +1,9 @@
 <script lang="ts">
-    const { onclick }: { onclick: () => void } = $props();
+    const { onclick, text }: { onclick: () => void, text: string } = $props();
 </script>
 
 <button class="play-round-btn" {onclick}>
-    Play Round
+    {text}
     <!-- Sparkles wrapper -->
     <span class="sparkles">
         <span class="sparkle sparkle1"></span>

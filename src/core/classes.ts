@@ -1,4 +1,5 @@
 import { AllCards } from "./cards.ts";
+import { PlayerHp } from "./consts.ts";
 import logger from "./logger.ts";
 import {type CardName, type CardStat, type Card as CardType, type Player as PlayerType} from "./types.ts";
 
@@ -68,7 +69,7 @@ export class Player implements PlayerType {
 
     constructor(name: string) {
         this.cardsInHands = [];
-        this.hp = 50;
+        this.hp = PlayerHp;
         this.name = name;
         logger.info('New player instance created');
     }

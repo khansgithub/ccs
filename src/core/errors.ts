@@ -2,10 +2,15 @@ type ErrorMessageFn = (vars?: unknown) => string;
 
 type ErrorTypes = 
     | 'InvalidCard'
-    | 'InvalidPlayer';
+    | 'InvalidPlayer'
+    | 'PlayersNotSet'
+    | 'RoundNotSet'
+    ;
 const ErrorMessages: Record<ErrorTypes, ErrorMessageFn> = {
     InvalidCard: (v) => `No card at index '${v}' in 'AllCardTypesFactory'`,
     InvalidPlayer: (v) => `No player at index '${v}'`,
+    PlayersNotSet: (v) => `'players' must be set for ReactiveUpdateFunctions before calling a function`,
+    RoundNotSet: (v) => `'round' must be set for ReactiveUpdateFunctions before calling a function`,
 };
 
 export class AppError extends Error {

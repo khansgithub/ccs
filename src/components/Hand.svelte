@@ -1,7 +1,7 @@
 <script lang="ts">
     import Card from "./Card.svelte";
     import Nav from "./Nav.svelte";
-    import { picked_card, player_cards_data } from "../store/store";
+    import { player_cards_store } from "../store/store";
     import logger from "../core/logger";
     import { type Player } from "../core/types";
     // let cards = Array.from({ length: 50 }, (_, i) => `Card ${i + 1}`);
@@ -59,7 +59,7 @@
      * This function limits how many cards the player can select.
      */
     function disable_click(){
-        return $picked_card !== null;
+        return $player_cards_store !== null;
     }
 </script>
 
@@ -82,7 +82,7 @@
             onmousemove={onMouseMove}
         >
             <div class="hand-cards" bind:this={content}>
-                {#each Object.values($player_cards_data[0].cards) as card} 
+                {#each Object.values($player_cards_store[0].cards) as card} 
                     <Card card={card} disable_click={disable_click}/>
                 {/each}
             </div>

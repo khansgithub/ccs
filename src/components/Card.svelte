@@ -1,7 +1,7 @@
 <script lang="ts">
     import logger from "../core/logger";
     import type { Card } from "../core/types";
-    import { picked_card, game_over } from "../store/store";
+    import { player_cards_store, game_over_store, picked_card_store } from "../store/store";
     const {
         card,
         disable_click,
@@ -11,24 +11,24 @@
 
     export function toggleSelected(e: MouseEvent) {
         e.preventDefault();
-        if ($game_over) return;
+        if ($game_over_store) return;
         // if (disable_click() && !selected) return;
         selected = !selected;
         logger.info(`Selected card ${selected ? "✅" : "❎"}`);
         logger.info(`Card: ${selected ? card.name : "none"}`);
-        picked_card.set(
+        picked_card_store.set(
             selected ? card : null,
         );
     }
 
-    picked_card.subscribe((picked_card) => {
+    picked_card_store.subscribe(picked_card_store => {
         if (selected) {
             /*
             deselect this card when:
-                - the round resets (and picked_card is set to null)
-                - another card is picked (and picked_card is a different value)
+                - the round resets (and player_cards_store is set to null)
+                - another card is picked (and player_cards_store is a different value)
             */
-            if (picked_card === null || picked_card !== card) {
+            if (picked_card_store === null || picked_card_store !== card) {
                 selected = false;
             }
         }
