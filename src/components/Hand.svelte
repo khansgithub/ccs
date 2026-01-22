@@ -6,8 +6,8 @@
     import { type Player } from "../core/types";
     // let cards = Array.from({ length: 50 }, (_, i) => `Card ${i + 1}`);
     const props: {player: Player} = $props();
-    let carousel: HTMLDivElement = $state();
-    let content: HTMLDivElement;
+    let carousel: HTMLDivElement | null = $state(null);
+    let content: HTMLDivElement | null = $state(null);
 
     let scrollLeft = 0;
     let isDragging = false;
@@ -19,10 +19,11 @@
     }
 
     function updateScroll(newScrollLeft: number) {
+        if (!carousel || !content) return;
         scrollLeft = clamp(
             newScrollLeft,
             0,
-            content.scrollWidth - carousel.clientWidth,
+            Math.max(0, content.scrollWidth - carousel.clientWidth),
         );
         if (scrollLeft < 0) return;
         content.style.transform = `translateX(${-scrollLeft}px)`;
@@ -36,6 +37,7 @@
 
     // Mouse drag handlers
     function onMouseDown(event: MouseEvent) {
+        if (!carousel) return;
         isDragging = true;
         dragStartX = event.clientX;
         scrollStartLeft = scrollLeft;
@@ -44,6 +46,7 @@
     }
 
     function onMouseUp() {
+        if (!carousel) return;
         isDragging = false;
         carousel.style.cursor = "grab";
         carousel.style.userSelect = "auto";
