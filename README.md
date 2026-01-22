@@ -1,4 +1,4 @@
-# CCS (Card Combat Svelte) — WIP
+# CCS — WIP
 
 Building a **turn-based card game** (similar to **Hearthstone** / **Legends of Runeterra**). The project started as a Typescript project, but currently considering moving to Godot.
 
