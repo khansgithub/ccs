@@ -39,7 +39,7 @@
     // var round_data = round_button(round_data);
     // -----------------------------------------------------
 
-    type getPickedCardsType = () => [CardType | null, CardType]
+    type getPickedCardsType = () => [CardType, CardType]
 
     class ReactiveUpdateFunctions {
         private constructor() {}
@@ -136,7 +136,7 @@
         }
     }
 
-    function getPickedCards(players: Players): [CardType | null, CardType] {
+    function getPickedCards(players?: Players): [CardType, CardType] {
         return [$picked_card_store, pickCard(players[1].cardsInHands)];
     }
 
@@ -160,14 +160,12 @@
 
     function executeRound(round: Round): Round {
         const picked_cards = round.picked_cards();
-        const self_card = picked_cards[0];
-        const opponent_card = picked_cards[1];
-        if (self_card === null) {
-            logger.error(`No card selected (self_card is null)`);
+        if (picked_cards.includes(null)) {
+            logger.error(`null found in ${picked_cards}`);
             return round;
         }
 
-        runRound([self_card, opponent_card], round.players);
+        runRound(picked_cards, round.players);
 
         ReactiveUpdateFunctions.all({
             player_cards_store: player_cards_store,
@@ -205,17 +203,13 @@
         game_over_store.set(false);
     }
 
-    let winner: Player | false | null = $state(null);
-    let self_hp = $state(0);
-    let opponent_hp = $state(0);
+    var round = makeRound();
+    ReactiveUpdateFunctions.setRound(round);
+    ReactiveUpdateFunctions.player_cards(player_cards_store);
 
-    let round = $state(makeRound());
-
-    $effect(() => {
-        ReactiveUpdateFunctions.setRound(round);
-        ReactiveUpdateFunctions.player_cards(player_cards_store);
-        ReactiveUpdateFunctions.states();
-    });
+    var winner = $state(round.winner);
+    var self_hp = $state(round.self_hp);
+    var opponent_hp = $state(round.opponent_hp);
     // round = executeRound(round);
 
     // -----------------------------------------------------

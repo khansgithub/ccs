@@ -2,7 +2,7 @@
     type LeftRight = "left" | "right";
 
     interface Props {
-        carousel: HTMLDivElement | null;
+        carousel: HTMLDivElement;
         direction: LeftRight;
     }
 
@@ -19,7 +19,6 @@
     };
 
     function scroll() {
-        if (!carousel) return;
         carousel.scrollBy({
             left: left_right[direction].scroll,
             behavior: "smooth",
