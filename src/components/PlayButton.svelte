@@ -18,6 +18,7 @@
 <style>
     .play-round-btn {
         position: relative;
+        margin: 5px;
         padding: 0.75rem 1.5rem;
         width: fit-content;
         font-size: 1.125rem;

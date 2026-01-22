@@ -8,8 +8,92 @@
     --color-dark-bg: #383838;
 
     /* Cards */
-    --card-light: linear-gradient(160deg, hsl(324, 100%, 97%), hsl(308, 100%, 95%));
-    --card-dark: linear-gradient(160deg, hsl(300, 100%, 12%), hsl(295, 100%, 9%));
+    --outer-bg: #e7b89d;
+    --outer-bg-2: #b07473;
+    --frame-gold: #f4d7b6;
+
+
+    --inner-light: linear-gradient(160deg, hsl(331, 70%, 85%), hsl(274, 65%, 90%));
+    --inner-dark: linear-gradient(160deg, hsl(331, 21%, 29%), hsl(274, 19%, 17%));
+
+    --symbol-light: #ffd580;
+    --symbol-dark: #b07c49;
+
+    --frame-glow-inset: rgba(255, 223, 186, 0.15);
+    --color-inner-shadow: rgba(0, 0, 0, 0.6);
+    --symbol-shadow: rgba(176, 124, 73, 0.45);
+    --symbol-inset-glow: rgba(255, 215, 128, 0.15);
+    --symbol-flare: rgba(255, 215, 128, 0.12);
+    --card-body-bg: rgba(255, 255, 255, 0.03);
+    --card-body-border: rgba(255, 255, 255, 0.06);
+    --placeholder-text: rgba(255, 255, 255, 0.9);
+    --card-name-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.12));
+    --card-name-border: rgba(255, 215, 170, 0.09);
+    --card-name-text: hsl(31, 100%, 11%);
+    --card-name-text-dark: hsl(31, 79%, 81%);
+    --card-name-inset-shadow: 0 8px 20px rgba(255, 255, 255, 0.4) inset;
+    --card-name-inset-shadow-dark: 0 8px 20px rgba(0, 0, 0, 0.4) inset;
+    --sparkle-gradient: linear-gradient(180deg, #fff, #ffe6b3);
+    --sparkle-shadow: rgba(255, 255, 200, 0.9);
+
+    :root {
+        /* Backgrounds */
+        --bg-light-top: #fff8fb;
+        --bg-light-bottom: #ffeaf4;
+
+        /* Outer card */
+        --outer-bg: #fef3f8;
+        --outer-bg-2: #fbd3e1;
+        --frame-gold: #e8c892;
+
+        /* Inner panel */
+        --inner-top: #fff8f2;
+        --inner-bottom: #ffeef6;
+
+        /* Symbol (sun/star) */
+        --symbol-light: #fff2cc;
+        --symbol-dark: #f6c37d;
+        --symbol-glow-inner: rgba(255, 237, 181, 0.3);
+        --symbol-glow-outer: rgba(242, 201, 120, 0.45);
+        --symbol-rays: rgba(255, 223, 180, 0.2);
+
+        /* Shadows & Borders */
+        --shadow-main: rgba(255, 214, 230, 0.4);
+        --shadow-inset: rgba(255, 223, 230, 0.3);
+        --inner-glow: rgba(255, 195, 225, 0.5);
+        --border-body: rgba(250, 200, 220, 0.5);
+        --footer-glow: rgba(255, 180, 200, 0.3);
+        --footer-border: rgba(255, 194, 223, 0.4);
+
+        /* Text */
+        --text-primary: #663355;
+        --text-secondary: #a66a94;
+        --text-banner: #cc6699;
+
+        /* Placeholder panel */
+        --panel-bg: rgba(255, 255, 255, 0.4);
+
+        /* Banner */
+        --banner-bg-top: rgba(255, 255, 255, 0.2);
+        --banner-bg-bottom: rgba(255, 204, 228, 0.2);
+
+        /* Wings */
+        --wing-top: #fff;
+        --wing-bottom: #f4e5f1;
+
+        /* Laurel leaves */
+        --leaf-light: #e5d8b0;
+        --leaf-dark: #c4b49c;
+
+        /* Clouds */
+        --cloud-base: #ffffff;
+        --cloud-shadow: #f8f8ff;
+
+        /* Sparkles */
+        --sparkle-core-top: #fff;
+        --sparkle-core-bottom: #ffe6f1;
+        --sparkle-glow: rgba(255, 224, 240, 0.8);
+    }
 
     /* Text */
     --text-light: hsl(299, 51%, 46%);
@@ -32,12 +116,12 @@
     --shadow-light: hsla(300, 100%, 87%, 0.4);
     --shadow-dark: hsla(279, 100%, 70%, 0.3);
     --color-shadow: hsla(309, 100%, 81%, 0.4);
+    --color-shadow-white: hsla(0, 0%, 100%, 0.742);
     --color-shadow-hover: hsla(309, 100%, 81%, 0.6);
     --color-hover-shadow: hsla(0, 0%, 0%, 0.185);
     --color-dark-shadow: hsla(0, 0%, 0%, 0.15);
     --color-dark-hover-shadow: hsla(0, 0%, 100%, 0.433);
     --color-dark-box-shadow: hsla(300, 100%, 74%, 0.3);
-    --color-shadow-white: hsla(0, 0%, 100%, 0.742);
 
     /* Gradients */
     --color-gradient-start: hsl(312, 100%, 90%);
@@ -49,8 +133,11 @@
     --color-hover-bg-light: hsl(0, 100%, 98%);
     --color-hover-bg-dark: hsl(0, 0%, 28%);
 
-
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif;
     line-height: 1.5;
     font-weight: 400;
     background-color: var(--bg-colour);

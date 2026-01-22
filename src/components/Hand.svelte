@@ -69,7 +69,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="row-wrapper">
     <div class="col col-1">
-        <div class="cover"></div>
+        <!-- <div class="cover"></div> -->
     </div>
     <div class="col col-2">
         <div
@@ -95,8 +95,10 @@
     .row-wrapper {
         display: flex;
         width: 100%;
-        height: 50%;
+        height: 100%;
         position: relative;
+        border: 10px solid red !important;
+
     }
     .col {
         overflow: visible;
@@ -110,8 +112,7 @@
     }
     .col-2 {
         flex: 0 0 80%;
-        max-width: 80%;
-        min-width: 80%;
+        width: 80%;
     }
     .col-3 {
         flex: 0 0 10%;
@@ -120,9 +121,12 @@
         /* overflow: hidden; */
         display: flex;
         width: 100%; /* now fills the 80% container */
-        height: 50%; /* fills 240px height from wrapper */
-        max-height: 500px;
-        min-height: 240px;
+        height: 100%;
+        /*height: 50%; /* fills 240px height from wrapper */
+        /* max-height: 500px;
+        min-height: 240px; */
+        border: 1px solid red !important;
+
         align-self: flex-end;
         padding: 1rem;
         z-index: 0;

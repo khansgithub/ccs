@@ -29,3 +29,156 @@ h1 {
   height: 100%;
   text-align: center;
 }
+
+/* --------------------- Root base font size */
+html {
+  font-size: 1dvh; /* 1rem = 16px */
+}
+
+body {
+  font-size: 1rem;
+  /* line-height: 1.5; */
+}
+
+/* Headings */
+h1 {
+  font-size: 2.5rem; /* 40px */
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+}
+
+h3 {
+  font-size: 1.75rem; /* 28px */
+}
+
+h4 {
+  font-size: 1.5rem; /* 24px */
+}
+
+h5 {
+  font-size: 1.25rem; /* 20px */
+}
+
+h6 {
+  font-size: 1rem; /* 16px */
+}
+
+/* Paragraphs */
+p {
+  font-size: 1rem; /* 16px */
+}
+
+/* Inline text elements */
+small {
+  font-size: 0.875rem; /* 14px */
+}
+
+strong,
+b {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+em,
+i {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+mark {
+  font-size: 1rem;
+  background-color: yellow;
+}
+
+/* Code and preformatted text */
+code,
+kbd,
+samp {
+  font-size: 0.9375rem; /* 15px */
+  font-family: monospace;
+}
+
+pre {
+  font-size: 0.9375rem; /* 15px */
+}
+
+/* Blockquotes */
+blockquote {
+  font-size: 1.125rem; /* 18px */
+  margin: 1em 0;
+}
+
+/* Lists */
+ul,
+ol {
+  font-size: 1rem;
+}
+
+li {
+  font-size: 1rem;
+}
+
+/* Table elements */
+table {
+  font-size: 1rem;
+}
+
+caption {
+  font-size: 0.875rem;
+}
+
+th,
+td {
+  font-size: 1rem;
+}
+
+/* Form elements */
+input,
+button,
+select,
+textarea {
+  font-size: 1rem;
+}
+
+/* Labels and legends */
+label,
+legend {
+  font-size: 1rem;
+}
+
+/* Details & summary */
+details,
+summary {
+  font-size: 1rem;
+}
+
+.card-image{
+  background-size: cover;
+}
+
+.card-firey{
+  background-image: url('./assets/firey.jpg');
+}
+.card-watery{
+  background-image: url('./assets/watery.jpg');
+}
+.card-shield{
+  background-image: url('./assets/shield.jpg');
+}
+.card-jump{
+  background-image: url('./assets/jump.jpg');
+}
+.card-sword{
+  background-image: url('./assets/sword.jpg');
+}
+.card-mirror{
+  background-image: url('./assets/mirror.jpg');
+}
+.card-thunder{
+  background-image: url('./assets/thunder.jpg');
+}
+.card-time{
+  background-image: url('./assets/time.jpg');
+}

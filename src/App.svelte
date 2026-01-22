@@ -31,15 +31,7 @@
         if (saved) darkMode = saved === "true";
     });
 
-    // var round_data = {};
-    // function round_button(round_data) {
-    //     const new_round_data = {};
-    //     return new_round_data;
-    // }
-    // var round_data = round_button(round_data);
-    // -----------------------------------------------------
-
-    type getPickedCardsType = () => [CardType, CardType]
+    type getPickedCardsType = () => [CardType, CardType];
 
     class ReactiveUpdateFunctions {
         private constructor() {}
@@ -64,11 +56,15 @@
          * Make sure `players` is set before calling this function.
          * Updates the state `self_hp`, `opponent_hp` by side effect.
          */
-        static player_hp(): [number, number] {
+        static player_hp() {
             this.checkDataIsSet();
             self_hp = this.players[0].hp;
             opponent_hp = this.players[1].hp;
-            return [self_hp, opponent_hp];
+        }
+
+        static player_self_status() {
+            self_status = this.players[0].status;
+            logger.debug("self status", self_status);
         }
 
         /**
@@ -89,6 +85,7 @@
         }) {
             this.checkDataIsSet();
             this.player_hp();
+            this.player_self_status();
             this.winner();
             this.player_cards(data.player_cards_store);
             this.player_picked_card_null(data.picked_card_store);
@@ -97,7 +94,7 @@
         /**
          * Updates the $states - self_hp, opponent_hp, winner
          */
-        static states(){
+        static states() {
             this.player_hp();
             this.winner();
         }
@@ -143,16 +140,10 @@
     function makeRound(): Round {
         const round_number = 1;
         const players: Players = [newPlayer("foo"), newPlayer("bar")] as const;
-        // const r = new Round(
-        //     round_number,
-        //     { f: getPickedCardsFunction, args: [players] },
-        //     // (() => return getPickedCardsFunction(players))
-        //     players,
-        // );
 
         const r = new Round(
             round_number,
-            (() => getPickedCards(players)),
+            () => getPickedCards(players),
             players,
         );
         return r;
@@ -172,11 +163,12 @@
             picked_card_store: picked_card_store,
         });
 
+        // debugger;
+
         const alive_players = filterAlivePlayers(round.players);
         const round_state = roundState(alive_players);
         if (round_state == CONTINUE) {
             round.round_number++;
-            return round;
         } else {
             game_over_store.set(true);
             if (round_state == WIN) {
@@ -192,8 +184,8 @@
     function playButtonClick() {
         round = executeRound(round);
     }
-    
-    function playAgainButtonClick(){
+
+    function playAgainButtonClick() {
         round = makeRound();
         ReactiveUpdateFunctions.setRound(round);
         ReactiveUpdateFunctions.all({
@@ -210,79 +202,7 @@
     var winner = $state(round.winner);
     var self_hp = $state(round.self_hp);
     var opponent_hp = $state(round.opponent_hp);
-    // round = executeRound(round);
-
-    // -----------------------------------------------------
-    // class Match {
-    //     readonly deck: CardType[];
-    //     readonly players: Players;
-
-    //     constructor(deck_size: number, players: Players) {
-    //         this.deck = buildDeck(deck_size);
-    //         this.players = players;
-    //     }
-
-    //     public dealCards() {
-    //         dealCards(this.players, this.deck);
-    //     }
-    // }
-
-    // const deck = buildDeck(50);
-    // const players = [newPlayer("foo"), newPlayer("bar")] as const;
-    // let winner: Player | null = $state(null);
-    // let self_hp = $state(getPlayerHp(0));
-    // let opponent_hp = $state(getPlayerHp(1));
-    // let round = 1; // for some reason this works even without beign a $state
-
-    // dealCards(players, deck);
-
-    // player_cards_store.update((current) => {
-    //     players.forEach((player, index) => {
-    //         current[index as 0 | 1].cards = player.cardsInHands;
-    //     });
-    //     // logger.debug(`Cards updated to`, current);
-    //     return current;
-    // });
-
-    // function playRound(): void {
-    //     const player_1_card: Card = $picked_card_store;
-    //     const player_2_card: Card = pickCard(players[1].cardsInHands);
-    //     if (player_1_card === null || player_2_card === null) return;
-    //     runRound([player_1_card, player_2_card], players);
-    //     logger.info(`HP ${players[0].name}: ${players[0].hp}`);
-    //     logger.info(`HP ${players[1].name}: ${players[1].hp}`);
-    //     updateReactiveData();
-
-    //     const alive_players = filterAlivePlayers(players);
-    //     const round_state = roundState(alive_players);
-    //     switch (round_state) {
-    //         case WIN:
-    //             winner = alive_players[0];
-    //             game_over_store.set(true);
-    //             break;
-    //         case DRAW:
-    //             game_over_store.set(true);
-    //             return;
-    //         default:
-    //             break;
-    //     }
-    //     round++;
-    // }
-
-    // function updateReactiveData() {
-    //     self_hp = getPlayerHp(0);
-    //     opponent_hp = getPlayerHp(1);
-    //     player_cards_store.update((current) => {
-    //         players.forEach((player, index) => {
-    //             current[index as 0 | 1].cards = player.cardsInHands;
-    //         });
-    //         // logger.debug(`Cards updated to`, current);
-    //         return current;
-    //     });
-    //     picked_card_store.set(null);
-    // }
-
-    function playAgain() {}
+    var self_status: Player["status"] = $state(round.players[0].status);
 </script>
 
 <main class:dark={darkMode}>
@@ -290,8 +210,11 @@
     <div class="row row1 hand_opponent"></div>
     <div class="row row2 board">
         <h1>Round: {round.round_number}</h1>
-        <h2>Self ({round.players[0].name}) HP: {self_hp}</h2>
         <h2>Opponent ({round.players[1].name}) HP: {opponent_hp}</h2>
+        <h2>Self ({round.players[0].name}) HP: {self_hp}</h2>
+        {#each Object.entries(self_status) as stat}
+            <h2>{stat[0]}: {stat[1]}</h2>
+        {/each}
         {#if $game_over_store}
             {#if winner}
                 <h2>Winner is: {winner.name}</h2>
@@ -347,22 +270,34 @@
     }
 
     .row {
+        --middle_row: 50%;
+        /* --middle_row: 70%; */
         display: flex;
         flex-direction: column;
+        flex-grow: 0;           /* prevents growing */
+        flex-shrink: 0;         /* prevents shrinking */
+        height: 100%;
+        border: 1px solid white;
     }
 
-    .row1 {
-        flex-basis: 20%;
+    .row.row1 {
+        /* flex-basis: 20%; */
+        flex-basis: calc((100% - var(--middle_row))/2);
     }
 
-    .row2 {
-        flex-basis: 60%;
+    .row.row2 {
+        flex-basis: var(--middle_row);
         justify-content: center;
         place-items: center;
+        overflow: hidden;
     }
 
-    .row3 {
-        flex-basis: 20%;
+    .row.row2 *{
+        font-size: 100%;
+    }
+
+    .row.row3 {
+        flex-basis: calc((100% - var(--middle_row))/2);
         justify-content: flex-end;
         margin-bottom: 10px;
     }
@@ -379,5 +314,6 @@
         height: 100%;
         /* background: gray; */
         justify-self: end;
+        
     }
 </style>

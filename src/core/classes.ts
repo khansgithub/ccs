@@ -1,94 +1,86 @@
 import { AllCards } from "./cards.ts";
 import { PlayerHp } from "./consts.ts";
 import logger from "./logger.ts";
-import {type CardName, type CardStat, type Card as CardType, type Player as PlayerType} from "./types.ts";
+import {
+    type CardName,
+    type CardStat,
+    type Card as CardType,
+    type Player as PlayerType,
+} from "./types.ts";
 
+/**
+ * Base Card class using dynamic card name + data from AllCards
+ */
 abstract class Card implements CardType {
     name: CardName;
     abstract stats: CardStat[];
+
     constructor(cardName: CardName) {
         this.name = cardName;
     }
 
     toString(): string {
-        return `${this.name}Card`;
+        return `${this.name} Card`;
     }
 }
 
-export class FooCard extends Card {
+/**
+ * Generic Card Factory Class
+ * Accepts any CardName and instantiates it from AllCards data
+ */
+export class ClowCard extends Card {
     stats: CardStat[];
 
-    constructor() {
-        super('Foo');
-        this.stats = AllCards[this.name];
-        logger.debug('FooCard instantiated');
-    }
+    constructor(name: CardName) {
+        super(name);
+        this.stats = AllCards[this.name].details;
 
-    // toString(): string {
-    //     return ""+
-    //     "+--------------+" +
-    //     "|   FOO CARD   |" +
-    //     "|              |" +
-    //     "|   (\_/)      |" +
-    //     "|  ( •_•)      |" +
-    //     "|  / >🍪       |" +
-    //     "|              |" +
-    //     "|   SAKURA     |" +
-    //     "+--------------+" 
-    // }    
+        logger.debug(`${this.name} card instantiated`);
+    }
 }
 
-export class BarCard extends Card {
-    stats: CardStat[];
-
-    constructor() {
-        super('Bar');
-        this.stats = AllCards[this.name];
-        logger.debug('BarCard instantiated');
-    }
-
-    // toString(): string {
-    //     return "" +
-    //     "+--------------+" +
-    //     "|   BAR CARD   |" +
-    //     "|              |" +
-    //     "|   /\_/\      |" +
-    //     "|  ( o.o )     |" +
-    //     "|   > ^ <      |" +
-    //     "|              |" +
-    //     "|   SAKURA     |" +
-    //     "+--------------+" 
-    // }
-}
-
+/**
+ * Player class with updated battle-related fields:
+ * - tempDef: temporary defense
+ * - tempDodge: temporary dodge %
+ * - isStunned: boolean to skip next turn
+ */
 export class Player implements PlayerType {
-    public cardsInHands: Card[];
-    public hp: number;
+    static id = 0;
+    public id = 0;
     public name: string;
+    public hp: number;
+    public cardsInHands: Card[];
     public picked_card?: Card;
 
+    // 🔥 NEW: battle runtime state
+    public status = {
+        tempDef: 0,
+        tempDodge: 0,
+        isStunned: false,
+    }
+
     constructor(name: string) {
-        this.cardsInHands = [];
-        this.hp = PlayerHp;
+        this.id = Player.id ++;
         this.name = name;
-        logger.info('New player instance created');
+        this.hp = PlayerHp;
+        this.cardsInHands = [];
+
+        logger.info(`New player instance created: ${name}`);
     }
 
-    public dealCard(card: Card) {
-        // logger.debug(`Dealing card: ${card.toString()}`);
+    public dealCard(card: Card): void {
         this.cardsInHands.push(card);
-        // logger.info(`Cards in hand now: ${this.cardsInHands}`);
+        logger.debug(`${this.name} received card: ${card.name}`);
     }
 
-    public showCards() : Card[] {
-        const cardList = Object.values(this.cardsInHands).map(card => card.toString()).join(', ');
-        // logger.debug(`Showing cards: ${cardList}`);
+    public showCards(): Card[] {
+        const list = this.cardsInHands.map((card) => card.toString()).join(", ");
+        logger.debug(`${this.name} has cards: ${list}`);
         return this.cardsInHands;
     }
 
     public toString(): string {
         return `Player: ${this.name}`;
     }
-
-
 }
